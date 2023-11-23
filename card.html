@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>card</title>
+  <title>Game Room</title>
   <style>
     body{
       display: flex;
@@ -12,9 +12,9 @@
     }
     img {
       <!-- width: 700px; -->
-	  position: relative;
+      position: relative;
       width:  700px;
-	  height: 700px;
+      height: 700px;
     }
     input{
       border-radius: 20px;
@@ -22,16 +22,70 @@
       margin: 10px auto;
       font-size: 50px;
     }
+	label {
+		display: block;
+		font:
+		1rem 'Fira Sans',
+		sans-serif;
+		  }
+
+	input,
+	label {
+		margin: 0.4rem 0;
+	}
+	
+	
+	
   </style>
 </head>
 <body>
+
+
+<h1>Welcome to the Game Room</h1>
+    <div id="game-board">
+        <!-- 游戏界面将显示在这里 -->
+    </div>
+    <script src="app.js"></script>
+ 
+
+ 
+<div id="timer">
+  10
+</div>
+
+<button onclick="start()">start</button>
+
+<div id="v"></div>
+ 
+<label for="name">輸入答案 (4個字):</label>
+
+<input type="text" id="name" name="name" required minlength="4" maxlength="4" size="10" />
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
 <script>
-function card(){
+function start(){
+//   按下 start 後 id 為 timer 的 DIV 內容可以開始倒數到到 0。 
+  var timer = document.querySelector("#timer");
+  var number = 10;
+  setInterval(function(){
+    number -- ;
+    if(number <= 0 )
+      number = 0;
+    timer.innerText = number + 0 }, 1000);
+    
 var a=document.getElementById("v");
-var c=document.getElementById("w");
-var d=document.getElementById("x");
-var e=document.getElementById("y");
-var f=document.getElementById("z");
+
+ 
+
 var ca = new Array(50);
 ca[0]="<img src='AS.png' id='a'/>";
 ca[1]="<img src='AH.png' id='b'/>";
@@ -86,35 +140,36 @@ ca[49]="<img src='KH.png' id='ay'/>";
 ca[50]="<img src='KD.png' id='az'/>";
 ca[51]="<img src='KC.png' id='ba'/>";
 
+ 
+
+ 
+
+ 
+
 
 var g = Math.floor(Math.random()*51);
-var h = Math.floor(Math.random()*51);
-var i = Math.floor(Math.random()*51);
-var j = Math.floor(Math.random()*51);
-var k = Math.floor(Math.random()*51);
-if (g==h){
-var h = Math.floor(Math.random()*51);
-}
-if (h==i){
-var i = Math.floor(Math.random()*51);
-}if (i==j){
-var j = Math.floor(Math.random()*51);
-}if (j==k){
-var h = Math.floor(Math.random()*51);
-}if (k==h){
-var h = Math.floor(Math.random()*51);
-}
-a.innerHTML="1:" +ca[g];
-c.innerHTML="2:" +ca[h];
-d.innerHTML="3:" +ca[i];
-e.innerHTML="4:" +ca[j];
-f.innerHTML="5:" +ca[k];
+
+ 
 
 
+a.innerHTML=ca[g];
 }
 </script>
-<div id="v"></div>
 
-<input type="button" onclick="card();" value="抽取圖片"/>
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+ 
+
+ 
+
+
 </body>
 </html>
