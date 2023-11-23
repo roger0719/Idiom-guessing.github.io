@@ -1,5 +1,5 @@
 // 创建 WebSocket 连接
-const socket = new WebSocket('ws://your-server-url');
+const socket = new WebSocket('https://roger0719.github.io/test/card.html');
 
 // 当连接建立时触发
 socket.addEventListener('open', (event) => {
