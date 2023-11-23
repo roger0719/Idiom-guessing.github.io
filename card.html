@@ -1,175 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Room</title>
-  <style>
-    body{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    img {
-      <!-- width: 700px; -->
-      position: relative;
-      width:  700px;
-      height: 700px;
-    }
-    input{
-      border-radius: 20px;
-      outline: none;
-      margin: 10px auto;
-      font-size: 50px;
-    }
-	label {
-		display: block;
-		font:
-		1rem 'Fira Sans',
-		sans-serif;
-		  }
-
-	input,
-	label {
-		margin: 0.4rem 0;
-	}
-	
-	
-	
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Game</title>
+    <style>
+        #cardContainer img {
+            max-width: 100px; /* 設定卡片圖片最大寬度，可以根據需要調整 */
+        }
+    </style>
 </head>
 <body>
-
-
-<h1>Welcome to the Game Room</h1>
-    <div id="game-board">
-        <!-- 游戏界面将显示在这里 -->
+    <div>
+        <label for="userInput">Enter the card name:</label>
+        <input type="text" id="userInput">
+        <button onclick="startGame()">Start</button>
+        <p id="timer"></p>
+        <p id="result"></p>
+        <div id="cardContainer"></div>
     </div>
-    <script src="app.js"></script>
- 
 
- 
-<div id="timer">
-  10
-</div>
+    <script>
+        function startGame() {
+            var timerDisplay = document.getElementById("timer");
+            var resultDisplay = document.getElementById("result");
+            var cardContainer = document.getElementById("cardContainer");
+            var userInputField = document.getElementById("userInput");
 
-<button onclick="start()">start</button>
+            var countdown = startCountdown(timerDisplay, 10);
 
-<div id="v"></div>
- 
-<label for="name">輸入答案 (4個字):</label>
+            var cards = [
+                "AS.png", "AH.png","2S.png", "2H.png", "2D.png", "2C.png",
+				"3S.png", "3H.png", "3D.png", "3C.png",
+				"4S.png", "4H.png", "4D.png", "4C.png",
+				"5S.png", "5H.png", "5D.png", "5C.png",
+				"6S.png", "6H.png", "6D.png", "6C.png",
+				"7S.png", "7H.png", "7D.png", "7C.png",
+				"8S.png", "8H.png", "8D.png", "8C.png",
+				"9S.png", "9H.png", "9D.png", "9C.png",
+				"10S.png", "10H.png", "10D.png", "10C.png",
+				"JS.png", "JH.png", "JD.png", "JC.png",
+				"QS.png", "QH.png", "QD.png", "QC.png",
+				"KS.png", "KH.png", "KD.png", "KC.png" 
+            ];
 
-<input type="text" id="name" name="name" required minlength="4" maxlength="4" size="10" />
+            var correctAnswer = showRandomCard(cards, cardContainer);
 
- 
+            function startCountdown(displayElement, seconds) {
+                var number = seconds;
+                var interval = setInterval(function () {
+                    number = Math.max(0, number - 1);
+                    displayElement.innerText = number;
 
- 
+                    if (number === 0) {
+                        clearInterval(interval);
+                        checkAnswer();
+                    }
+                }, 1000);
 
- 
+                return interval;
+            }
 
- 
+            function showRandomCard(cardNames, containerElement) {
+                var randomIndex = Math.floor(Math.random() * cardNames.length);
+                var cardName = cardNames[randomIndex];
+                var cardHTML = "<img src='" + cardName + "' alt='Card' />";
+                containerElement.innerHTML = cardHTML;
+                return cardName;
+            }
 
- 
-
-<script>
-function start(){
-//   按下 start 後 id 為 timer 的 DIV 內容可以開始倒數到到 0。 
-  var timer = document.querySelector("#timer");
-  var number = 10;
-  setInterval(function(){
-    number -- ;
-    if(number <= 0 )
-      number = 0;
-    timer.innerText = number + 0 }, 1000);
-    
-var a=document.getElementById("v");
-
- 
-
-var ca = new Array(50);
-ca[0]="<img src='AS.png' id='a'/>";
-ca[1]="<img src='AH.png' id='b'/>";
-ca[2]="<img src='AD.png' id='c'/>";
-ca[3]="<img src='AC.png' id='d'/>";
-ca[4]="<img src='2S.png' id='e'/>";
-ca[5]="<img src='2H.png' id='f'/>";
-ca[6]="<img src='2D.png' id='g'/>";
-ca[7]="<img src='2C.png' id='h'/>";
-ca[8]="<img src='3S.png' id='i'/>";
-ca[9]="<img src='3H.png' id='j'/>";
-ca[10]="<img src='3D.png' id='k'/>";
-ca[11]="<img src='3C.png' id='l'/>";
-ca[12]="<img src='4S.png' id='m'/>";
-ca[13]="<img src='4H.png' id='n'/>";
-ca[14]="<img src='4D.png' id='o'/>";
-ca[15]="<img src='4C.png' id='p'/>";
-ca[16]="<img src='5S.png' id='q'/>";
-ca[17]="<img src='5H.png' id='r'/>";
-ca[18]="<img src='5D.png' id='s'/>";
-ca[19]="<img src='5C.png' id='t'/>";
-ca[20]="<img src='6S.png' id='u'/>";
-ca[21]="<img src='6H.png' id='v'/>";
-ca[22]="<img src='6D.png' id='w'/>";
-ca[23]="<img src='6C.png' id='x'/>";
-ca[24]="<img src='7S.png' id='y'/>";
-ca[25]="<img src='7H.png' id='z'/>";
-ca[26]="<img src='7D.png' id='aa'/>";
-ca[27]="<img src='7C.png' id='ab'/>";
-ca[28]="<img src='8S.png' id='ac'/>";
-ca[29]="<img src='8H.png' id='ad'/>";
-ca[30]="<img src='8D.png' id='ae'/>";
-ca[31]="<img src='8C.png' id='af'/>";
-ca[32]="<img src='9S.png' id='ag'/>";
-ca[33]="<img src='9H.png' id='ai'/>";
-ca[34]="<img src='9D.png' id='aj'/>";
-ca[35]="<img src='9C.png' id='ak'/>";
-ca[36]="<img src='10S.png' id='al'/>";
-ca[37]="<img src='10H.png' id='am'/>";
-ca[38]="<img src='10D.png' id='an'/>";
-ca[39]="<img src='10C.png' id='ao'/>";
-ca[40]="<img src='JS.png' id='ap'/>";
-ca[41]="<img src='JH.png' id='aq'/>";
-ca[42]="<img src='JD.png' id='ar'/>";
-ca[43]="<img src='JC.png' id='as'/>";
-ca[44]="<img src='QS.png' id='at'/>";
-ca[45]="<img src='QH.png' id='au'/>";
-ca[46]="<img src='QD.png' id='av'/>";
-ca[47]="<img src='QC.png' id='aw'/>";
-ca[48]="<img src='KS.png' id='ax'/>";
-ca[49]="<img src='KH.png' id='ay'/>";
-ca[50]="<img src='KD.png' id='az'/>";
-ca[51]="<img src='KC.png' id='ba'/>";
-
- 
-
- 
-
- 
-
-
-var g = Math.floor(Math.random()*51);
-
- 
-
-
-a.innerHTML=ca[g];
-}
-</script>
-
- 
-
- 
-
- 
-
-
-
- 
-
- 
-
- 
-
-
+            function checkAnswer() {
+                var userInput = userInputField.value.toLowerCase();
+                var result = userInput === correctAnswer.toLowerCase() ? "Correct!" : "Incorrect. Try again.";
+                resultDisplay.innerText = result;
+            }
+        }
+    </script>
 </body>
 </html>
